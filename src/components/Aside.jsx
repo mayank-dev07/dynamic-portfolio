@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
 import {
   GiCalendar,
   GiClawSlashes,
@@ -11,22 +9,22 @@ import useStore from "../zustand";
 
 const Aside = () => {
   const { data } = useStore();
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   return (
     <aside className="sidebar">
       <div className="sidebar-info">
         <figure className="avatar-box">
-          <img src={"/images/mamun.jpg"} alt="Richard hanrick" width="80" />
+          <img src={data?.about?.avatar?.url} alt="image" width="80" />
         </figure>
 
         <div className="info-content">
           <h1 className="name" title="Richard hanrick">
-            {data.about.name}
+            {data?.about?.name}
           </h1>
 
-          <p className="title">{data.about.title}</p>
+          <p className="title">{data?.about?.title}</p>
+          <br />
+          <p style={{ color: "white" }}>{` " ${data?.about?.quote} "`}</p>
         </div>
 
         <button className="info_more-btn" data-sidebar-btn>
@@ -49,7 +47,7 @@ const Aside = () => {
               <p className="contact-title">Email</p>
 
               <a href="mailto:richard@example.com" className="contact-link">
-                richard@example.com
+                {data?.about?.contactEmail}
               </a>
             </div>
           </li>
@@ -63,7 +61,7 @@ const Aside = () => {
               <p className="contact-title">Phone</p>
 
               <a href="tel:+12133522795" className="contact-link">
-                +1 (213) 352-2795
+                {data?.about?.phoneNumber}
               </a>
             </div>
           </li>
@@ -74,9 +72,12 @@ const Aside = () => {
             </div>
 
             <div className="contact-info">
-              <p className="contact-title">Birthday</p>
+              <p className="contact-title">Experience</p>
 
-              <time dateTime="1982-06-23">June 23, 1982</time>
+              <time dateTime="1982-06-23">
+                {" "}
+                {`${data?.about?.exp_year} Years `}
+              </time>
             </div>
           </li>
 
@@ -89,7 +90,7 @@ const Aside = () => {
             <div className="contact-info">
               <p className="contact-title">Location</p>
 
-              <address>Sacramento, California, USA</address>
+              <address>{data?.about?.address}</address>
             </div>
           </li>
         </ul>

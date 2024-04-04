@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 import { FaBookReader, FaRegBookmark } from "react-icons/fa";
-import TimelineItem from './TimelineItem';
-import SkillItem from './SkillItem';
+import TimelineItem from "./TimelineItem";
+import SkillItem from "./SkillItem";
+import useStore from "../../zustand";
 
 const Resume = () => {
+  const { data } = useStore();
+
+  console.log(data.timeline);
   return (
     <section>
       <header>
@@ -16,32 +20,6 @@ const Resume = () => {
             <FaBookReader />
           </div>
           <h3 className="h3">Education</h3>
-        </div>
-        <ol className="timeline-list">
-          <TimelineItem
-            title="University school of the arts"
-            date="2007 — 2008"
-            description="Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et quas molestias exceptur."
-          />
-          <TimelineItem
-            title="New york academy of art"
-            date="2006 — 2007"
-            description="Ratione voluptatem sequi nesciunt, facere quisquams facere menda ossimus, omnis voluptas assumenda est omnis."
-          />
-          <TimelineItem
-            title="High school of art and design"
-            date="2002 — 2004"
-            description="Duis aute irure dolor in reprehenderit in voluptate, quila voluptas mag odit aut fugit, sed consequuntur magni dolores eos."
-          />
-        </ol>
-      </div>
-
-      <div className="timeline">
-        <div className="title-wrapper">
-          <div className="icon-box">
-            <FaRegBookmark />
-          </div>
-          <h3 className="h3">Experience</h3>
         </div>
         <ol className="timeline-list">
           <TimelineItem
@@ -62,7 +40,28 @@ const Resume = () => {
         </ol>
       </div>
 
-      <div className="skill">
+      <div className="timeline" style={{ Width: "80%" }}>
+        <div className="title-wrapper">
+          <div className="icon-box">
+            <FaRegBookmark />
+          </div>
+          <h3 className="h3">Experience</h3>
+        </div>
+        <ol className="timeline-list">
+          {data?.timeline?.map((item, index) => (
+            <TimelineItem
+              key={index}
+              title={item.company_name}
+              date={`${item.startDate.split("T")[0]}- ${
+                item.endDate.split("T")[0]
+              }`}
+              description={item.summary}
+            />
+          ))}
+        </ol>
+      </div>
+
+      {/* <div className="skill">
         <h3 className="h3 skills-title">My skills</h3>
         <ul className="skills-list content-card">
           <SkillItem title="Web design" value={80} />
@@ -70,7 +69,7 @@ const Resume = () => {
           <SkillItem title="Branding" value={90} />
           <SkillItem title="WordPress" value={50} />
         </ul>
-      </div>
+      </div> */}
     </section>
   );
 };

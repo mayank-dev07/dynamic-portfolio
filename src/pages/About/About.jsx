@@ -1,165 +1,68 @@
-/* eslint-disable react/no-unescaped-entities */
-
-import { useEffect, useState } from "react"
 import Testimonial from "./Testimonial";
 import Service from "./Service";
-
-const servicesData = [
-  {
-    icon: "/images/icon-design.svg",
-    title: "Web design",
-    description: "The most modern and high-quality design made at a professional level."
-  },
-  {
-    icon: "/images/icon-dev.svg",
-    title: "Web development",
-    description: "High-quality development of sites at the professional level."
-  },
-  {
-    icon: "/images/icon-app.svg",
-    title: "Mobile apps",
-    description: "Professional development of applications for iOS and Android."
-  },
-  {
-    icon: "/images/icon-photo.svg",
-    title: "Photography",
-    description: "I make high-quality photos of any category at a professional level."
-  }
-];
-
+import useStore from "../../zustand";
 
 const About = () => {
-  const [testimonials , setTestimonials ] = useState([]);
-  useEffect(()=> {
-    fetch('testimonials.json').then(res => res.json()).then(data => {
-      console.log(data)
-      setTestimonials(data)
-    });
-  }, [])
+  const { data } = useStore();
   return (
     <article className="about  active" data-page="about">
+      <header>
+        <h2 className="h2 article-title">About me</h2>
+      </header>
 
-    <header>
-      <h2 className="h2 article-title">About me</h2>
-    </header>
+      <section className="about-text">
+        <p>{data?.about?.subTitle}</p>
 
-    <section className="about-text">
-      <p>
-        I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print media.
-        I enjoy
-        turning complex problems into simple, beautiful and intuitive designs.
-      </p>
+        <p>{data?.about?.description}</p>
+      </section>
 
-      <p>
-        My job is to build your website so that it is functional and user-friendly but at the same time attractive.
-        Moreover, I
-        add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring
-        across your
-        message and identity in the most creative way. I created web design for many famous brand companies.
-      </p>
-    </section>
+      <section className="service">
+        <h3 className="h3 service-title">What i'm doing</h3>
 
-
-    {/* <!--
-      - service
-    --> */}
-
-    <section className="service">
-
-      <h3 className="h3 service-title">What i'm doing</h3>
-
-      <ul className="service-list">
-
-      {servicesData.map((service, index) => (
+        <ul className="service-list">
+          {data?.services?.map((service, index) => (
             <Service
               key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
+              icon={service.image.url}
+              title={service.name}
+              description={service.desc}
+              charge={service.charge}
             />
           ))}
+        </ul>
+      </section>
 
-      </ul>
+      <section className="testimonials">
+        <h3 className="h3 testimonials-title">Testimonials</h3>
 
-    </section>
-
-
-    {/* <!--
-      - testimonials
-    --> */}
-
-    <section className="testimonials">
-
-      <h3 className="h3 testimonials-title">Testimonials</h3>
-
-      <ul className="testimonials-list has-scrollbar">
-
-      {testimonials.map((testimonial, index) => (
+        <ul className="testimonials-list has-scrollbar">
+          {data?.testimonials?.map((testimonial, index) => (
             <Testimonial
               key={index}
               name={testimonial.name}
-              avatar={testimonial.avatar}
-              testimonial={testimonial.testimonial}
+              avatar={testimonial.image.url}
+              position={testimonial.position}
+              testimonial={testimonial.review}
             />
           ))}
+        </ul>
+      </section>
 
-      </ul>
+      <section className="clients">
+        <h3 className="h3 clients-title">Social</h3>
 
-    </section>
+        <ul className="clients-list has-scrollbar">
+          {data?.social_handles?.map((social, index) => (
+            <li className="clients-item" key={index}>
+              <a href="#">
+                <img src={social?.image.url} alt="client logo" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+};
 
-
-    {/* <!--
-      - clients
-    --> */}
-
-    <section className="clients">
-
-      <h3 className="h3 clients-title">Clients</h3>
-
-      <ul className="clients-list has-scrollbar">
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-1-color.png" alt="client logo"/>
-          </a>
-        </li>
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-2-color.png" alt="client logo"/>
-          </a>
-        </li>
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-3-color.png" alt="client logo"/>
-          </a>
-        </li>
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-4-color.png" alt="client logo"/>
-          </a>
-        </li>
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-5-color.png" alt="client logo"/>
-          </a>
-        </li>
-
-        <li className="clients-item">
-          <a href="#">
-            <img src="images/logo-6-color.png"alt="client logo"/>
-          </a>
-        </li>
-
-      </ul>
-
-    </section>
-
-  </article>
-  )
-}
-
-export default About
+export default About;

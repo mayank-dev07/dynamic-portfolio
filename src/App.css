@@ -1598,7 +1598,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .main-content {
     position: relative;
-    width: max-content;
     margin: auto;
   }
 
