@@ -26,12 +26,6 @@ const Aside = () => {
           <br />
           <p style={{ color: "white" }}>{` " ${data?.about?.quote} "`}</p>
         </div>
-
-        <button className="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <GiClawSlashes />
-        </button>
       </div>
 
       <div className="sidebar-info_more">

@@ -4,17 +4,17 @@ import TimelineItem from "./TimelineItem";
 import SkillItem from "./SkillItem";
 import useStore from "../../zustand";
 
-const Resume = () => {
+const Timeline = () => {
   const { data } = useStore();
 
-  console.log(data.timeline);
+  console.log(data);
   return (
     <section>
       <header>
-        <h2 className="h2 article-title">Resume</h2>
+        <h2 className="h2 article-title">Timeline</h2>
       </header>
 
-      <div className="timeline">
+      {/* <div className="timeline">
         <div className="title-wrapper">
           <div className="icon-box">
             <FaBookReader />
@@ -38,7 +38,7 @@ const Resume = () => {
             description="Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et quas molestias exceptur."
           />
         </ol>
-      </div>
+      </div> */}
 
       <div className="timeline" style={{ Width: "80%" }}>
         <div className="title-wrapper">
@@ -56,6 +56,8 @@ const Resume = () => {
                 item.endDate.split("T")[0]
               }`}
               description={item.summary}
+              jobtitle={item.jobTitle}
+              location={item.jobLocation}
             />
           ))}
         </ol>
@@ -74,4 +76,4 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+export default Timeline;

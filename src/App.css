@@ -307,7 +307,7 @@ main {
 
 .sidebar {
   margin-bottom: 15px;
-  max-height: 112px;
+  /* max-height: 112px; */
   overflow: hidden;
   transition: var(--transition-2);
 }
@@ -380,11 +380,7 @@ main {
 
 .info_more-btn span { display: none; }
 
-.sidebar-info_more {
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transition-2);
-}
+
 
 .sidebar.active .sidebar-info_more {
   opacity: 1;
@@ -865,7 +861,6 @@ main {
 
 .project-img {
   position: relative;
-  width: 100%;
   height: 200px;
   border-radius: 16px;
   overflow: hidden;
@@ -1239,7 +1234,7 @@ textarea.form-input::-webkit-resizer { display: none; }
    */
 
   .sidebar {
-    max-height: 180px;
+    max-height: min-content;
     margin-bottom: 30px;
   }
 

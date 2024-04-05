@@ -17,7 +17,7 @@ const About = () => {
       </section>
 
       <section className="service">
-        <h3 className="h3 service-title">What i'm doing</h3>
+        <h3 className="h3 service-title">Services</h3>
 
         <ul className="service-list">
           {data?.services?.map((service, index) => (
